@@ -1,0 +1,18 @@
+#   1.在10000h处写入字形数据2266h
+
+mov ax,1000h
+mov ds,ax
+mov ax,2266h
+mov [0],ax
+
+#   2.不能使用"mov 内存单元，寄存器" 这类命令完成上述功能
+
+mov ax,1000h
+mov ss,ax
+mov sp,0002h
+mov ax,2266h
+push ax
+
+#   注意：push,pop等栈操作指令，修改的只是sp,也就是说栈顶的变化
+#   范围最大为: 0 ~ ffffh
+#   push,pop实质上是一种内存传送指令，注意灵活运用

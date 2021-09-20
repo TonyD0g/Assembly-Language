@@ -1,0 +1,15 @@
+#   1.将10000h ~ 1000fh 这段空间当做栈，初始栈为空
+#   2.设置ax=001ah,bx=001bh
+#   3.利用栈，交换ax和bx中的数据.
+
+mov ax,1000h 
+mov ss,ax 
+mov sp,0010h
+mov ax,001ah 
+mov bx,001bh 
+
+push ax
+push bx
+
+pop ax 
+pop bx

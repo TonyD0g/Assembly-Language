@@ -1,0 +1,20 @@
+#伪代码
+#编程：
+#   1.将10000h ~ 1000fh 这段空间当做栈，初始状态下栈是空的
+#   2.设置ax=001ah,bx=001bh
+#   3.将ax,bx中的数据入栈
+#   4.然后将ax,bx清零
+#   5.从栈中恢复ax,bx原来的内容
+
+mov ax,1000h 
+mov ss,ax 
+mov sp,0010h
+mov ax,001ah 
+mov bx,001bh 
+push ax 
+push bx
+mov ax,0
+mov bx,0
+
+pop bx #栈中的数据是倒过来的
+pop ax
