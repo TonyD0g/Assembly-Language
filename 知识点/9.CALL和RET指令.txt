@@ -1,0 +1,94 @@
+ret 指令用栈中的数据，修改IP的内容，从而实现近转移
+retf 指令用栈中的数据，修改CS和IP的内容，从而实现远转移
+
+CPU执行ret指令时，相当于进行：  pop IP
+CPU执行retf指令时，相当于进行： pop IP
+                              pop CS 
+
+
+CPU执行CALL指令时，相当于进行:  push IP 
+                              jmp near ptr 标号 ( (IP)=(IP)+16位位移)
+
+
+CALL指令不能实现短转移,CALL指令实现转移的方法和jmp指令的原理一致(机器码 + 偏移地址)
+
+
+call far ptr 标号   ：实现的是段间转移
+
+
+CPU执行 "call far ptr 标号" 时,相当于进行:   push CS
+                                            push IP
+                                            jmp far ptr 标号
+
+
+转移地址在寄存器中的call指令:  call 16位reg ,相当于执行 push IP
+                                                     jmp 16位reg                            
+
+
+转移地址在内存中的call指令有两种格式:
+    1.call word ptr 内存单元地址    ,相当于执行 push IP ,jmp word ptr 内存单元地址
+
+    2.call dword ptr 内存单元地址   ,相当于执行 push CS ,push IP ,jmp dword ptr 内存单元地址
+
+
+
+call 和 ret 的配合使用(即高级语言中的子程序):   
+
+                    assume cs:code
+                    code segment
+                    main:call sub1
+                        mov ax,4c00h
+
+                    sub1:sub ax,3
+                        ret
+                        
+                    code ends
+                    end start
+
+
+mul指令:mul指令是乘法指令
+    两个相乘的数要么都是8位，要么都是16位。
+    1.如果是8位，一个默认放在AL中，另一个放在8位reg 或内存字节单元中.
+    2.如果是16位，一个默认放在AX中，另一个放在16位reg 或内存字单元中.
+
+    结果:如果是8位乘法，结果默认放在AX中
+         如果是16位乘法，结果 高位默认放在DX中，低位在AX中存放
+
+    格式如下：  mul reg
+               mul 内存单元
+
+    其中内存单元可以用不同的寻址方式给出,比如:
+               mul byte ptr ds:[0]
+               含义：(ax)=(al)*((ds)*16+0)
+
+               mul word ptr [bx+si+8]
+               含义：(ax)=(ax)*((ds)*16+(bx)+(si)+8) 结果的低16位
+                     (dx)=(ax)*((ds)*16+(bx)+(si)+8) 结果的高16位
+
+            例如：
+                计算100*10: 100和10小于255，可以做8位乘法，程序如下:
+
+                            mov al,100
+                            mov bl,10
+                            mul bl
+
+                            结果:(ax)=1000 (03E8H)
+
+                计算100*10000:  100小于255，但10000大于255，所以必须做16位乘法，程序如下:
+                            mov ax,100
+                            mov bx,10000
+                            mul bx
+
+                            结果：(ax)=4240H , (dx)=000FH 
+
+
+    
+
+以后，我们编写子程序的标准框架如下:     (要注意寄存器入栈和出栈的顺序)
+    子程序开始：子程序中使用的寄存器入栈
+
+                子程序内容
+
+                子程序中使用的寄存器出栈
+
+                返回(ret,retf)
