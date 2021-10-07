@@ -2,12 +2,13 @@ ret 指令用栈中的数据，修改IP的内容，从而实现近转移
 retf 指令用栈中的数据，修改CS和IP的内容，从而实现远转移
 
 CPU执行ret指令时，相当于进行：  pop IP
+
 CPU执行retf指令时，相当于进行： pop IP
                               pop CS 
 
 
 CPU执行CALL指令时，相当于进行:  push IP 
-                              jmp near ptr 标号 ( (IP)=(IP)+16位位移)
+                              jmp near ptr 标号 ( (IP)=(IP)+16位位移 )
 
 
 CALL指令不能实现短转移,CALL指令实现转移的方法和jmp指令的原理一致(机器码 + 偏移地址)
@@ -38,6 +39,7 @@ call 和 ret 的配合使用(即高级语言中的子程序):
                     code segment
                     main:call sub1
                         mov ax,4c00h
+                        int 21h
 
                     sub1:sub ax,3
                         ret

@@ -1,4 +1,4 @@
-;实验9，根据材料编程
+;实验9，根据材料编程     
 
 ;编程：在屏幕中间分别显示绿色，绿底红色，白底蓝色的字符串 'welcome to masm!'
 ;编程所需要的知识:
@@ -63,6 +63,53 @@
 ;   B800:00A0    .. .. .. .. .. .. .. .. .. .. .. .. ... .. ..
 
 ;(注意，闪烁的效果必须在全屏DOS方式下才能看到.)
+
+assume cs:codesg,ss:stack
+data segment
+    db 'welcome to masm!'
+    db 00000010b,00100100b,00010111b
+data ends
+
+stack segment
+     db 16 dup (0)
+stack ends
+
+codesg segment
+start:      mov ax,data
+            mov ds,ax
+            mov ax,0B860H
+            mov es,ax
+            mov ax,stack
+            mov ss,ax
+            mov sp,16
+
+            mov cx,3
+            mov di,0
+            mov bx,0
+            mov ax,0
+
+     s2:    push cx
+     
+            mov cx,16
+            mov si,0
+       s1:  mov al,ds:byte ptr  [si]
+            mov ah,ds:byte ptr 16[bx]
+            mov es:word ptr  [di],ax
+
+            add di,2
+            inc si
+            loop s1
+            
+            inc bx
+            add di,080h
+            pop cx
+            loop s2
+       mov ax,4c00h
+       int 21h  
+codesg ends
+end start
+
+
 
 
 
