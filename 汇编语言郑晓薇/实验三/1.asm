@@ -1,3 +1,5 @@
+;coding:utf-8
+
 ;设W、X、Y、Z均为8位带符号数，要求完成计算表达式W=X+Y-Z。
 assume cs:code,ds:data
 data segment

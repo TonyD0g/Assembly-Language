@@ -1,12 +1,12 @@
 ;coding:utf-8
-;3.改为从键盘输入X，Y，Z的值，分别为1,4,3
-;输出格式:  3+2-1=4
 
+;如果运算结果小于0,显示的结果正确吗，如何解决
+;仅支持个位数运算
 assume cs:code,ds:data,ss:stack
 data segment
     x db ?  ;3
     y db ?  ;2
-    z db ?  ;1
+    z db ?  ;6
     w db ?  
 data ends
 
@@ -33,6 +33,7 @@ start:  mov ax,data
 
     s:  mov ah,1    ;从键盘上输入一个字符并将该字符的ASCII码送入al中    
         int 21h
+        sub al,30h
         mov ds:byte ptr [si],al
 
         mov ah,2    
@@ -41,15 +42,22 @@ start:  mov ax,data
 
         inc si
         loop s
-        
-        mov al,00h              ;运算
-        mov al,ds:byte ptr [x]
-        add al,ds:byte ptr [y]
-        sub al,ds:byte ptr [z]
+
+        mov bl,00h
+        mov al,00h
+        mov al,ds:byte ptr [z]
+        mov bl,ds:byte ptr [x]
+        add bl,ds:byte ptr [y]
+        sub al,bl
         mov ds:byte ptr [w],al
+
+        mov ah,2
+        mov dl,'-'
+        int 21h
 
         mov ah,2            ;输出w的结果
         mov dl,ds:byte ptr [w]
+        add dl,30h
         int 21h             ;执行完后，al的值等于dl的值
 
 
