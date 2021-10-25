@@ -1,6 +1,6 @@
-;coding:utf-8
-;3.æ”¹ä¸ºä»é”®ç›˜è¾“å…¥Xï¼ŒYï¼ŒZçš„å€¼ï¼Œåˆ†åˆ«ä¸º1,4,3
-;è¾“å‡ºæ ¼å¼:  3+2-1=4
+;coding:GBK
+;3.¸ÄÎª´Ó¼üÅÌÊäÈëX£¬Y£¬ZµÄÖµ£¬·Ö±ğÎª1,4,3
+;Êä³ö¸ñÊ½:  3+2-1=4
 
 assume cs:code,ds:data,ss:stack
 data segment
@@ -24,33 +24,33 @@ start:  mov ax,data
         mov sp,0006h
 
    
-       mov ax,'='   ;å°†ç¬¦å·å…¨éƒ¨å‹æ ˆ
+       mov ax,'='   ;½«·ûºÅÈ«²¿Ñ¹Õ»
        push ax
        mov ax,'-'
        push ax
        mov ax,'+'
        push ax
 
-    s:  mov ah,1    ;ä»é”®ç›˜ä¸Šè¾“å…¥ä¸€ä¸ªå­—ç¬¦å¹¶å°†è¯¥å­—ç¬¦çš„ASCIIç é€å…¥alä¸­    
+    s:  mov ah,1    ;´Ó¼üÅÌÉÏÊäÈëÒ»¸ö×Ö·û²¢½«¸Ã×Ö·ûµÄASCIIÂëËÍÈëalÖĞ    
         int 21h
         mov ds:byte ptr [si],al
 
         mov ah,2    
-        pop dx      ;ç¬¦å·å¼¹æ ˆ
+        pop dx      ;·ûºÅµ¯Õ»
         int 21h
 
         inc si
         loop s
         
-        mov al,00h              ;è¿ç®—
+        mov al,00h              ;ÔËËã
         mov al,ds:byte ptr [x]
         add al,ds:byte ptr [y]
         sub al,ds:byte ptr [z]
         mov ds:byte ptr [w],al
 
-        mov ah,2            ;è¾“å‡ºwçš„ç»“æœ
+        mov ah,2            ;Êä³öwµÄ½á¹û
         mov dl,ds:byte ptr [w]
-        int 21h             ;æ‰§è¡Œå®Œåï¼Œalçš„å€¼ç­‰äºdlçš„å€¼
+        int 21h             ;Ö´ĞĞÍêºó£¬alµÄÖµµÈÓÚdlµÄÖµ
 
 
         mov ax,4c00h

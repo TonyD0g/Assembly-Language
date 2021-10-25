@@ -1,5 +1,5 @@
-;coding:utf-8
-;1和2.改为从键盘输入X，Y，Z的值，分别为1,4,3
+;coding:GBK
+;1和2.改为从键盘直接输入X，Y，Z的值，分别为1,4,3
 
 assume cs:code,ds:data
 data segment

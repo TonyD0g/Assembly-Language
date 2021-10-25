@@ -1,10 +1,11 @@
+;coding:GBK
 DATAS SEGMENT
     STRING DB 'This is the new line!$'
     
 DATAS ENDS
 
 STACKS SEGMENT
-    ;æ­¤å¤„è¾“å…¥å †æ ˆæ®µä»£ç 
+    ;´Ë´¦ÊäÈë¶ÑÕ»¶Î´úÂë
 STACKS ENDS
 
 CODES SEGMENT
@@ -23,7 +24,7 @@ START:
 COUTENTER PROC
 	PUSH AX
 	PUSH DX
-	 ;å›žè½¦æ¢è¡Œ
+	 ;»Ø³µ»»ÐÐ
     MOV AH,02H
 	MOV DL,0DH
 	INT 21H

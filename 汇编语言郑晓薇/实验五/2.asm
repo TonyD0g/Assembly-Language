@@ -1,43 +1,43 @@
-;è¦æ±‚ï¼šï¼ˆ1ï¼‰ç”¨9å·åŠŸèƒ½æ˜¾ç¤ºä¸€ä¸²å­—ç¬¦ï¼Œå¦‚â€INPUT  YOUR NAME:â€ 
-;ï¼ˆ2ï¼‰åœ¨ä¸²çš„å°¾éƒ¨è¾“å…¥ä½ çš„è‹±æ–‡åå­—ï¼Œè‡³å°‘3ä¸ªå­—ç¬¦ï¼ŒæŒ‰å›žè½¦é”®åŽï¼Œ
-;ï¼ˆ3ï¼‰åœ¨ä¸‹ä¸€è¡Œï¼Œé‡æ–°æ˜¾ç¤ºä½ è¾“å…¥çš„åå­—ï¼Œ
-;ï¼ˆ4ï¼‰åå­—åŽé¢ï¼Œç»§ç»­æ˜¾ç¤ºä¸²â€œ(y/n)?â€
-;ï¼ˆ5ï¼‰ è¾“å…¥ä¸ºå­—æ¯â€yâ€ç»“æŸç¨‹åºï¼Œè¾“å…¥å­—æ¯â€nâ€å›žåˆ°ï¼ˆ1ï¼‰é‡æ–°è¾“å…¥ã€‚
+;coding:GBK
+;ÒªÇó£º£¨1£©ÓÃ9ºÅ¹¦ÄÜÏÔÊ¾Ò»´®×Ö·û£¬Èç¡±INPUT  YOUR NAME:¡± 
+;£¨2£©ÔÚ´®µÄÎ²²¿ÊäÈëÄãµÄÓ¢ÎÄÃû×Ö£¬ÖÁÉÙ3¸ö×Ö·û£¬°´»Ø³µ¼üºó£¬
+;£¨3£©ÔÚÏÂÒ»ÐÐ£¬ÖØÐÂÏÔÊ¾ÄãÊäÈëµÄÃû×Ö£¬
+;£¨4£©Ãû×ÖºóÃæ£¬¼ÌÐøÏÔÊ¾´®¡°(y/n)?¡±
+;£¨5£© ÊäÈëÎª×ÖÄ¸¡±y¡±½áÊø³ÌÐò£¬ÊäÈë×ÖÄ¸¡±n¡±»Øµ½£¨1£©ÖØÐÂÊäÈë¡£
 
 assume cs:code,ds:data
 data segment
    x db 'INPUT  YOUR NAME:','$'
-   y db 5,?,4 dup (0ah)
+   y db 10,?,4 dup (0ah,'$')
 data ends
 code segment
 start:      mov ax,data
             mov ds,ax
             mov dx,0
-            mov ah,9    ;åŠŸèƒ½9ï¼Œè¾“å‡ºä¸€ä¸ªå­—ç¬¦ä¸²
+            mov ah,9    ;¹¦ÄÜ9£¬Êä³öÒ»¸ö×Ö·û´®
             int 21h
 
 
-            mov ah,10   ;åŠŸèƒ½10ï¼Œè¾“å…¥ä¸€ä¸ªå­—ç¬¦ä¸²
+            mov ah,10   ;¹¦ÄÜ10£¬ÊäÈëÒ»¸ö×Ö·û´®
             mov dx,offset y
             int 21h
 
-            mov ah,2
-            mov dl,0DH
-            int 21H
-
-            mov ah,2
-            mov dl,0aH
-            int 21H
-
-
-
             mov dx,offset y+2       ;mov dx,0014
-            mov ah,9    ;åŠŸèƒ½9ï¼Œè¾“å‡ºä¸€ä¸ªå­—ç¬¦ä¸²
+            mov ah,9    ;¹¦ÄÜ9£¬Êä³öÒ»¸ö×Ö·û´®
             int 21h
 
-                        mov ah,2
-            mov dl,'$'
-            int 21H
+            ;mov ah,2
+           ; mov dl,0ah
+            ;int 21h   
+
+            ;mov ah,2
+            ;mov dl,20h
+            ;int 21h
+
+            ;mov ah,2
+            ;mov dl,'$'
+           ; int 21h   
+      
 
             mov ax,4c00h
             int 21h

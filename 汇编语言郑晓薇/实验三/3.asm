@@ -1,10 +1,10 @@
-;coding:utf-8
+;coding:GBK
+;3.Èç¹ûÔËËã½á¹ûĞ¡ÓÚ0,ÏÔÊ¾µÄ½á¹ûÕıÈ·Âğ£¬ÈçºÎ½â¾ö
 
-;å¦‚æœè¿ç®—ç»“æœå°äº0,æ˜¾ç¤ºçš„ç»“æœæ­£ç¡®å—ï¼Œå¦‚ä½•è§£å†³
-;ä»…æ”¯æŒä¸ªä½æ•°è¿ç®—
+;(½öÖ§³Ö¸öÎ»ÊıµÄ¸ºÊıÔËËã)
 assume cs:code,ds:data,ss:stack
 data segment
-    x db ?  ;3
+    x db ?  ;3  ;3+2-6
     y db ?  ;2
     z db ?  ;6
     w db ?  
@@ -24,20 +24,20 @@ start:  mov ax,data
         mov sp,0006h
 
    
-       mov ax,'='   ;å°†ç¬¦å·å…¨éƒ¨å‹æ ˆ
+       mov ax,'='   ;½«·ûºÅÈ«²¿Ñ¹Õ»
        push ax
        mov ax,'-'
        push ax
        mov ax,'+'
        push ax
 
-    s:  mov ah,1    ;ä»é”®ç›˜ä¸Šè¾“å…¥ä¸€ä¸ªå­—ç¬¦å¹¶å°†è¯¥å­—ç¬¦çš„ASCIIç é€å…¥alä¸­    
+    s:  mov ah,1    ;´Ó¼üÅÌÉÏÊäÈëÒ»¸ö×Ö·û²¢½«¸Ã×Ö·ûµÄASCIIÂëËÍÈëalÖĞ    
         int 21h
         sub al,30h
         mov ds:byte ptr [si],al
 
         mov ah,2    
-        pop dx      ;ç¬¦å·å¼¹æ ˆ
+        pop dx      ;·ûºÅµ¯Õ»
         int 21h
 
         inc si
@@ -55,10 +55,10 @@ start:  mov ax,data
         mov dl,'-'
         int 21h
 
-        mov ah,2            ;è¾“å‡ºwçš„ç»“æœ
+        mov ah,2            ;Êä³öwµÄ½á¹û
         mov dl,ds:byte ptr [w]
         add dl,30h
-        int 21h             ;æ‰§è¡Œå®Œåï¼Œalçš„å€¼ç­‰äºdlçš„å€¼
+        int 21h             ;Ö´ĞĞÍêºó£¬alµÄÖµµÈÓÚdlµÄÖµ
 
 
         mov ax,4c00h

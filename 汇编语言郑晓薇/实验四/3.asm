@@ -1,6 +1,6 @@
-;coding:utf-8
+;coding:GBK
 
-;4.è¾“å‡ºæ ¼å¼:
+;4.Êä³ö¸ñÊ½:
 ;1
 ;4
 ;3
@@ -20,7 +20,7 @@ start:  mov ax,data
         mov cx,3
         mov si,0
 
-    s:  mov ah,1    ;ä»é”®ç›˜ä¸Šè¾“å…¥ä¸€ä¸ªå­—ç¬¦å¹¶å°†è¯¥å­—ç¬¦çš„ASCIIç é€å…¥alä¸­    
+    s:  mov ah,1    ;´Ó¼üÅÌÉÏÊäÈëÒ»¸ö×Ö·û²¢½«¸Ã×Ö·ûµÄASCIIÂëËÍÈëalÖĞ    
         int 21h
         mov ds:byte ptr [si],al
 
@@ -44,7 +44,7 @@ start:  mov ax,data
 
         mov ah,2
         mov dl,ds:byte ptr [w]
-        int 21h             ;æ‰§è¡Œå®Œåï¼Œalçš„å€¼ç­‰äºdlçš„å€¼
+        int 21h             ;Ö´ĞĞÍêºó£¬alµÄÖµµÈÓÚdlµÄÖµ
 
         mov ax,4c00h
         int 21h

@@ -1,4 +1,4 @@
-;显示两行字符串
+;coding:GBK
 
 assume cs:code,ds:data
 data segment

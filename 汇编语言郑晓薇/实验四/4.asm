@@ -1,7 +1,7 @@
-;coding:utf-8
+;coding:GBK
 
-;5.åœ¨æ­¤åŸºç¡€ä¸Šï¼ŒæŠŠç¨‹åºæ”¹ä¸ºä¸‹é¢çš„è¡¨è¾¾å¼ï¼Œå†™å‡ºä»£ç ï¼š   
-;W=((X+Y)*2-Z)/2   ;X,Y,Z,Wå‡ä¸º8ä½äºŒè¿›åˆ¶æ•°å€¼
+;5.ÔÚ´Ë»ù´¡ÉÏ£¬°Ñ³ÌÐò¸ÄÎªÏÂÃæµÄ±í´ïÊ½£¬Ð´³ö´úÂë£º   
+;W=((X+Y)*2-Z)/2   ;X,Y,Z,W¾ùÎª8Î»¶þ½øÖÆÊýÖµ
 
 assume cs:code,ds:data,ss:stack
 data segment
@@ -25,7 +25,7 @@ start:  mov ax,data
         mov sp,001Ah
 
 
-       mov ax,'='   ;å°†ç¬¦å·å…¨éƒ¨åŽ‹æ ˆ
+       mov ax,'='   ;½«·ûºÅÈ«²¿Ñ¹Õ»
        push ax   
        mov ax,'2'   
        push ax
@@ -52,50 +52,50 @@ start:  mov ax,data
        mov ax,'w'
        push ax
       
-    s: mov ah,2    ;ç¬¦å·å¼¹æ ˆ
+    s: mov ah,2    ;·ûºÅµ¯Õ»
        pop dx      
        int 21h      
        loop s      ;w=((
 
-       mov ah,1    ;ä»Žé”®ç›˜ä¸Šè¾“å…¥ä¸€ä¸ªå­—ç¬¦å¹¶å°†è¯¥å­—ç¬¦çš„ASCIIç é€å…¥alä¸­    
+       mov ah,1    ;´Ó¼üÅÌÉÏÊäÈëÒ»¸ö×Ö·û²¢½«¸Ã×Ö·ûµÄASCIIÂëËÍÈëalÖÐ    
        int 21h      ;x
        mov ds:byte ptr [x],al
 
-       mov ah,2    ;ç¬¦å·å¼¹æ ˆ
+       mov ah,2    ;·ûºÅµ¯Õ»
        pop dx      
        int 21h      ;+
 
-       mov ah,1    ;ä»Žé”®ç›˜ä¸Šè¾“å…¥ä¸€ä¸ªå­—ç¬¦å¹¶å°†è¯¥å­—ç¬¦çš„ASCIIç é€å…¥alä¸­    
+       mov ah,1    ;´Ó¼üÅÌÉÏÊäÈëÒ»¸ö×Ö·û²¢½«¸Ã×Ö·ûµÄASCIIÂëËÍÈëalÖÐ    
        int 21h      ;y
        mov ds:byte ptr [y],al
 
        mov cx,4
-    s1:mov ah,2    ;ç¬¦å·å¼¹æ ˆ
+    s1:mov ah,2    ;·ûºÅµ¯Õ»
        pop dx      
        int 21h      ;) *2-
       loop s1
 
 
-       mov ah,1    ;ä»Žé”®ç›˜ä¸Šè¾“å…¥ä¸€ä¸ªå­—ç¬¦å¹¶å°†è¯¥å­—ç¬¦çš„ASCIIç é€å…¥alä¸­    
+       mov ah,1    ;´Ó¼üÅÌÉÏÊäÈëÒ»¸ö×Ö·û²¢½«¸Ã×Ö·ûµÄASCIIÂëËÍÈëalÖÐ    
        int 21h      ;z
        mov ds:byte ptr [z],al
 
 
        mov cx,4
-    s2:mov ah,2    ;ç¬¦å·å¼¹æ ˆ
+    s2:mov ah,2    ;·ûºÅµ¯Õ»
        pop dx      
        int 21h      ;)/2=
         loop s2
                    
         
-        mov ax,0000h              ;è¿ç®—
+        mov ax,0000h              ;ÔËËã
         mov al,ds:byte ptr [x]  ;x+y=w
         sub al,30h
         add al,ds:byte ptr [y]  ;x+y=w
         sub al,30h
 
         mov bl,02h
-        mul bl      ;w*2ï¼Œç»“æžœæ”¾åœ¨axä¸­
+        mul bl      ;w*2£¬½á¹û·ÅÔÚaxÖÐ
         ;mov ds:byte ptr [w],al
         mov bl,ds:byte ptr [z]
         sub bl,30h
@@ -105,10 +105,10 @@ start:  mov ax,data
 
         mov ds:byte ptr [w],al
 
-        mov ah,2            ;è¾“å‡ºwçš„ç»“æžœ
+        mov ah,2            ;Êä³öwµÄ½á¹û
         mov dl,ds:byte ptr [w]
         add dl,30h
-        int 21h             ;æ‰§è¡Œå®ŒåŽï¼Œalçš„å€¼ç­‰äºŽdlçš„å€¼
+        int 21h             ;Ö´ÐÐÍêºó£¬alµÄÖµµÈÓÚdlµÄÖµ
 
 
         mov ax,4c00h

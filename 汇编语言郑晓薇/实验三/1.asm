@@ -1,6 +1,6 @@
-;coding:utf-8
+;coding:GBK
 
-;è®¾Wã€Xã€Yã€Zå‡ä¸º8ä½å¸¦ç¬¦å·æ•°ï¼Œè¦æ±‚å®Œæˆè®¡ç®—è¡¨è¾¾å¼W=X+Y-Zã€‚
+;ÉèW¡¢X¡¢Y¡¢Z¾ùÎª8Î»´ø·ûºÅÊı£¬ÒªÇóÍê³É¼ÆËã±í´ïÊ½W=X+Y-Z¡£
 assume cs:code,ds:data
 data segment
     x db 5          
