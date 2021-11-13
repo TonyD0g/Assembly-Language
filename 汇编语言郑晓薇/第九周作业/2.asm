@@ -1,17 +1,19 @@
-;输出三位以下(包三位)的数字
 ;编制程序计算s=1+2+3+4+...+n 直到和大于500为止,
 ;并将结果由屏幕上显示出来(n的值和最终和的值)
+
 assume cs:code,ds:data,ss:stack
-stack segment
-    dw 8 dup (?)
-stack ends
+
 data segment
     buf1 db 'The n is (d):','$'
     buf2 db 'The sum is (d):','$'
     n dw ?
     sum dw ?
-
 data ends
+
+stack segment
+    dw 8 dup (?)
+stack ends
+
 code segment
 start:      mov ax,data
             mov ds,ax
@@ -20,14 +22,40 @@ start:      mov ax,data
             mov ss,ax
             mov sp,10h
 
+            mov ds:word ptr [sum],0
+            mov ds:word ptr [n],1
 
+goback:     cmp ds:word ptr [sum],500
+            ja over1
+            mov bx,ds:word ptr [n]
+            add ds:word ptr [sum],bx
+            add ds:word ptr [n],1
+            jmp goback
+
+
+    over1:  mov ah,9
+            mov dx,offset buf1      ;The n is :
+            int 21h
+
+            mov ax,ds:word ptr [n]
             mov dx,0
-            mov ax,528      ;这里填你想输出的数字
-            call stackdiv16    
+            call stackdiv16
+            call CR2
+
+            mov ah,9
+            mov dx,offset buf2       ;The sum is :
+            int 21h
+
+            mov ax,ds:word ptr [sum]
+            mov dx,0
+            call stackdiv16
+            call CR2
 
     over0:  mov ax,4c00h
             int 21h
 
+            ;被除数默认放在dx,ax中
+            ;123
 stackdiv16:   push si
               mov si,0
 

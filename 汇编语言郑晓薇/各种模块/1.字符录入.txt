@@ -1,0 +1,49 @@
+;作用:不断输入数字，直到输入回车就结束
+;执行完call control1后，值保存在al中(al变为纯数字),且bx的值会被修改!
+
+control1:			
+		push bx
+		push cx
+		push dx
+		xor bl, bl  ;bl保存结果	如果两个位的值相同（同为 0 或同为 1），则结果位等于 0；否则结果位等于 1。
+		xor cx, cx  ;将cx清零									   ;CX为正负标志，0为正，－1为负
+		mov ah, 1	
+		int 21h				
+		cmp al, '+'
+		jz symbol1
+		cmp al, '-'
+		jnz symbol2	
+		mov cx, -1
+symbol1: 						;作用:不断输入数字，直到输入回车就结束
+		mov ah,  1
+		int 21h
+symbol2:    					;-号:
+		cmp al, '0'				
+		jb exit1		;清除输入的字符中不是数字的ascii码值
+		cmp al, '9'		
+		ja exit1		;清除输入的字符中不是数字的ascii码值
+		
+		sub al, 30h	;将其变为纯数字
+		xor ah, ah	;将ah清零
+        call change
+		jmp symbol1
+exit1:
+		cmp cx, 0
+		jz exit2
+		neg bl
+exit2:
+		mov al, bl
+		pop dx
+		pop cx
+		pop bx
+		ret
+
+        ret
+
+change:	shl bl, 1	
+		mov dl, bl	;将0给dl
+		shl bl, 1	;将bl中的数据左移
+		shl bl, 1
+		add bl, dl
+		add bl, al
+        ret
