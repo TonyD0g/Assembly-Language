@@ -1,0 +1,68 @@
+;输出三位以下(包三位)的数字
+;被除数默认放在dx,ax中(即16位除法)
+
+;123
+;需要用到si,bx,dx,栈
+;后续使用可能需要增加栈保存
+
+
+;原理:
+;当ax不为0时,循环压栈
+
+;例1:123    / 任意的几位数字
+;123/10 = 12 ...3   3压栈(即dx压栈)
+;12/10 = 1 ... 2   2压栈(即dx压栈)
+;1/10 = 0 ... 1    1压栈(即dx压栈,此时ax为0,不再压栈)
+;最后全部弹栈,   所以结果为:    123
+
+stackdiv16 proc far
+              push bx
+              push dx
+              push si
+              mov si,0
+              
+cricle1:      mov bx,10
+              div bx
+
+              cmp ax,0
+              jbe  next1     ;商比0小就退出，代表数据全部处理完毕
+              
+              push dx
+              inc si
+              mov dx,0
+
+              jmp cricle1
+
+next1:        push dx
+              inc si
+next2:        cmp si,0
+              jbe next3         ;如果计数器小于0，则结束
+
+              pop bx
+              dec si
+              mov ah,2
+              mov dl,bl
+              add dl,30h
+              int 21h
+
+              jmp next2
+             
+next3:        ;call CR2          ;回车和换行
+              
+              
+              pop si     
+              pop dx       
+              pop bx
+              ret
+
+CR2  proc far    
+                mov ah,2
+                mov dl,0ah
+                int 21h   
+                mov ah,2
+                mov dl,0dh
+                int 21h
+                ret
+CR2 endp
+
+stackdiv16 endp

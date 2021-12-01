@@ -1,7 +1,8 @@
-;作用:不断输入数字，直到输入回车就结束
+;作用:不断输入数字，直到输入回车就结束(8位无符号数,即范围在0~255)
 ;执行完call control1后，值保存在al中(al变为纯数字),且bx的值会被修改!
 
-control1:			
+control1 proc far			
+		
 		push bx
 		push cx
 		push dx
@@ -39,11 +40,15 @@ exit2:
 		ret
 
         ret
-
-change:	shl bl, 1	
-		mov dl, bl	;将0给dl
-		shl bl, 1	;将bl中的数据左移
-		shl bl, 1
-		add bl, dl
-		add bl, al
+		
+change proc far
+	shl bl, 1	
+	mov dl, bl	;将0给dl
+	shl bl, 1	;将bl中的数据左移
+	shl bl, 1
+	add bl, dl
+	add bl, al
         ret
+change endp
+
+control1 endp

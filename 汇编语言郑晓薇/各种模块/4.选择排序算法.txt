@@ -1,0 +1,44 @@
+        ;选择排序算法
+;需要用到栈,si,ax,bx,
+;number1+si  代表起始地址
+
+            mov cx,6
+            mov si,0
+x1:         mov al,ds:byte ptr [number1+si]     ;for (i = 0; i < 6;i++)
+            call x2                             ;for (j = i; j < 6 ;j++)
+            inc si 
+            loop x1 
+            jmp over
+
+
+
+
+
+x2:     push cx
+        push si     
+        mov dx,si
+        mov ds:byte ptr [TheSi],dl
+
+x3:     
+        cmp al,ds:byte ptr [number1+si]     ;if(a[i]>a[j])
+        ja change1      ;交换值
+change2: inc si
+        loop x3
+        
+        jmp over3
+        
+change1:push si
+        mov bl,al
+        mov al,ds:byte ptr [number1+si]
+
+        mov si,ds:word ptr [TheSi]              ;;;;;;;;关键核心,把a[j]给到a[i]
+        mov ds:byte ptr [number1+si],al         ;;;;;;;;关键核心,把a[j]给到a[i]        
+        pop si
+        mov ds:byte ptr [number1+si],bl
+      
+        jmp change2
+
+        
+over3:  pop si
+        pop cx
+        ret

@@ -44,6 +44,7 @@ continue3:  inc si
             mov ah,0
             mov bx,0
             mov al,ds:byte ptr [max]
+
             call stackdiv16
 
             
@@ -106,26 +107,26 @@ change:	shl bl, 1
 stackdiv16:   push si
               mov si,0
 
-cricle:       cmp ax,99     ;如果超过2位数，则跳走
+cricle:       cmp ax,99         ;如果超过2位数，则跳走
               ja cricle2
-              cmp ax,90         ;先压dx,再压ax,最后弹栈
-              jz 
+              cmp ax,90         ;(特殊情况)先压dx,再压ax,最后弹栈
+              jz    next4
               cmp ax,80
-              jz              
+              jz    next4            
               cmp ax,70
-              jz
+              jz    next4
               cmp ax,60
-              jz
+              jz    next4
               cmp ax,50
-              jz
+              jz    next4
               cmp ax,40
-              jz
+              jz    next4
               cmp ax,30
-              jz
+              jz    next4
               cmp ax,20
-              jz
+              jz    next4
               cmp ax,10
-              jz              
+              jz    next4             
 cricle1:      mov bx,10
               div bx
 
@@ -163,6 +164,21 @@ next2:        cmp si,0
 
               jmp next2
 
+next4:        mov bx,10
+              div bx
+              push dx
+              push ax
+              pop bx
+              mov ah,2
+              mov dl,bl
+              add dl,30h
+              int 21h
+              pop bx
+              mov ah,2
+              mov dl,bl
+              add dl,30h
+              int 21h
+              jmp next3              
  
 next3:        call CR2          ;回车和换行
               pop si            
