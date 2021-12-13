@@ -42,12 +42,12 @@ exit2:
         ret
 		
 change proc far
-	shl bl, 1	
-	mov dl, bl	;将0给dl
-	shl bl, 1	;将bl中的数据左移
-	shl bl, 1
-	add bl, dl
-	add bl, al
+	shl bx, 1	
+	mov dx, bx	
+	shl bx, 1	
+	shl bx, 1       ;将bl中的数据左移两次,使bl==8
+	add bx, dx
+	add bx, ax      
         ret
 change endp
 

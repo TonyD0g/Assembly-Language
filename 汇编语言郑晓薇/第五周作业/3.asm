@@ -1,6 +1,7 @@
 ;coding:GBK
 ;3.如果运算结果小于0,显示的结果正确吗，如何解决
 
+;应该用补码neg      ,这里我投机取巧了，你可以试着改改
 ;(仅支持个位数的负数运算)
 assume cs:code,ds:data,ss:stack
 data segment

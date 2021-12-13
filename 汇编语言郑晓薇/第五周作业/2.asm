@@ -29,6 +29,7 @@ start:  mov ax,data
 
         mov bl,al
         mov bh,ah
+        
         mov ah,2
         mov dl,bl
         add dl,30h

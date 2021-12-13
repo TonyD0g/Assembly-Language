@@ -25,9 +25,7 @@ start:      mov ax,data
             mov dx,offset y
             int 21h
 
-            call CR
-
-
+            call CR     ;把最后输入的空格删除
 
             mov ah,2
             mov dl,0ah

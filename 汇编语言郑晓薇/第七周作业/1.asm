@@ -1,5 +1,5 @@
 ;coding:GBK
-;不断输入小写字符，将输入的小写字符转换为大写字母如果输入的是ESC控制字符，则停止
+;不断输入大写字符，将输入的大写字符转换为小写字母,如果输入的是ESC控制字符，则停止
 assume cs:code
 code segment
 start:  mov ah,1

@@ -10,7 +10,7 @@
 
 assume cs:code,ds:data
 data segment
-    x db -111
+    x db -11
     y db ?
 data ends
 

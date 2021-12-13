@@ -214,7 +214,7 @@ ScoreOutPut1:   mov ah,9
                 mov dx,offset buf6
                 int 21h
                 call CR2
-
+            
                 call ScoreOutPut                ;输出学生成绩
                 call ChangeStudent              ;修改学生成绩
                 mov ah,9
