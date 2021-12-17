@@ -1,0 +1,13 @@
+@startuml
+start
+:计算这一年每月最后一天是本年中的第几天;
+:var=13,total=0,cx=12(月份);
+while (cx!=0)is( True )
+    :根据month去查找天数,例如month=1时,(month)=31;
+    :month=var-cx;
+    :total=total+(month);
+    :并输出"The last day of $month is the $total in this year";
+    :cx=cx-1;
+endwhile( No )
+end
+@enduml

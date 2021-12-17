@@ -1,0 +1,14 @@
+@startuml
+start
+:程序功能:该日是这一年的第几天？;
+:cx=用户输入的月份-1(cx代表月份);
+:ax=用户输入的日期;
+:total=0;
+while (cx!=0) is (True)
+    :例如cx=1时，(cx)=31天;
+    :total=cx所对应的天数+total;
+    :cx=cx-1;
+endwhile(False)
+:total=total+ax;
+end
+@enduml

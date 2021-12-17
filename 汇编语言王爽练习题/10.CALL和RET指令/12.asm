@@ -22,7 +22,7 @@
 ;通过调用这个子程序，进行字符串的显示时可以不必了解显存的结构，为编程提供了方便
 ;在实验中，注意体会这种设计思想
 
-;应用举例:在屏幕的8行3列，用绿色显示data段中的字符串
+;应用举例:在屏幕的6行3列，用绿色显示data段中的字符串
 assume cs:code
 data segment
     db 'Welcome to masm!',0
@@ -69,8 +69,8 @@ show_str:   push ax     ;保存子程序中用到的相关寄存器,防止和主
 
             mov si,0
         s2: mov al,ds:[si]       ;字符给入
-        	cmp al,0             ;原书这里超纲了，暂时还没学到cmp指令
-	        je ok                ;如果字符为0，则结束
+        	   cmp al,0             ;原书这里超纲了，暂时还没学到cmp指令
+	         je ok                ;如果字符为0，则结束
             mov ah,dl            ;颜色
             mov es:[bx+di],ax    ;导到显存
             add bx,2             ;在显存中 以（ASCII，属性）为块 进行存储

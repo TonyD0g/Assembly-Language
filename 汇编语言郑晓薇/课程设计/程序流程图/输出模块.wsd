@@ -1,0 +1,18 @@
+@startuml
+start
+:输出模块;
+:si=0，bx=10;
+while (ax！=0)is(True)
+    :div bx(执行完后ax为商,dx为余数);
+    :push dx(即将余数压栈);
+    :si=si+1; 
+endwhile(False)
+    :push dx;
+    :si=si+1;
+while (si！=0)is(True)
+    :pop bx;
+    :si=si-1;
+    :mov dl，bl & add dl，30h(即调用2号功能,输出字符);
+endwhile(False)
+end
+@enduml

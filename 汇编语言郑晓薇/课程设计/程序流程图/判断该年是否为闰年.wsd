@@ -1,0 +1,19 @@
+@startuml
+start
+:该年是否是闰年;
+if (用户输入的年份能被4整除) then (Yes)
+    if (是否不被100整除) then (Yes)
+    :该年是闰年;
+    else (No)
+    :该年是平年;
+    endif
+
+else (No)
+if(年份能被400整除) then (Yes)
+    :该年是闰年;
+    else (No)
+    :该年是平年;
+    endif
+endif
+end
+@enduml
